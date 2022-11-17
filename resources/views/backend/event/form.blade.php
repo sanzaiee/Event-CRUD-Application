@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ isset($event) ? 'Update Event' : 'Create Event' }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ isset($event) ? route('events.update',$event->id) : route('events.store') }}">
+                    <form method="POST" id="event-form" action="{{ isset($event) ? route('events.update',$event->id) : route('events.store') }}">
                         @isset($event)@method('PUT')@endisset
                         @csrf
                         <div class="row">

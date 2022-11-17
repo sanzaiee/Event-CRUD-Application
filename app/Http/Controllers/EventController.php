@@ -28,8 +28,12 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        $this->eventRepo->store($request->except('_token'));
-        return redirect()->route('events.index')->with('success', 'Event Created Successfully!');
+        try {
+            $this->eventRepo->store($request->except('_token'));
+            return redirect()->route('events.index')->with('success', 'Event Created Successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Something went wrong! Please try later');
+        }
     }
 
     public function edit($id)
@@ -40,13 +44,22 @@ class EventController extends Controller
 
     public function update(EventRequest $request, $id)
     {
-        $this->eventRepo->update($request->except('_token'), $id);
-        return redirect()->route('events.index')->with('success', 'Event Updated Successfully!');
+        try {
+            $this->eventRepo->update($request->except('_token'), $id);
+            return redirect()->route('events.index')->with('success', 'Event Updated Successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Something went wrong! Please try later');
+        }
     }
 
     public function destroy($event_id)
     {
-        $this->eventRepo->destroy($event_id);
-        return redirect()->route('events.index')->with('success', 'Event Deleted Successfully!');
+
+        try {
+            $this->eventRepo->destroy($event_id);
+            return redirect()->route('events.index')->with('success', 'Event Deleted Successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('danger', 'Something went wrong! Please try later');
+        }
     }
 }
