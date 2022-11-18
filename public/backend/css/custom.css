@@ -2,3 +2,10 @@
     color: #ff0000;
     font-weight: 600;
 }
+
+.welcome-section {
+    margin-bottom: 1rem !important;
+    align-items: center;
+    padding: 15px;
+    margin: 90px;
+}
